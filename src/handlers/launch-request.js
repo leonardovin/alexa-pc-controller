@@ -1,4 +1,6 @@
 const Alexa = require('ask-sdk');
+const BluetoothService = require('../services/BluetoothService');
+const logger = require('../logger');
 
 const LaunchRequestHandler = {
   canHandle(handlerInput) {
@@ -6,6 +8,20 @@ const LaunchRequestHandler = {
   },
   handle(handlerInput) {
     const speechText = 'Bem vindo ao controlador de computador. Me diga o que você quer fazer.';
+
+    // use the bluetooth service class to list the paired devices
+
+    logger.log('Getting devices');
+    BluetoothService.getBluetoothDevices((devices) => {
+      logger.log('Devices: ', devices);
+    });
+
+    // Get alexa device mac address
+    const deviceId = Alexa.getDeviceId(handlerInput.requestEnvelope);
+
+    if (deviceId) {
+      logger.log('Device ID: ', deviceId);
+    }
 
     return handlerInput.responseBuilder
       .speak(speechText)

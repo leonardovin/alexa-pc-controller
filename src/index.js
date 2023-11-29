@@ -16,6 +16,7 @@ const skillBuilder = SkillBuilders.custom();
 const IntentHandler = require('./handlers/intent');
 const LaunchRequestHandler = require('./handlers/launch-request');
 const ErrorHandler = require('./handlers/error-handler');
+const logger = require('./logger');
 
 skillBuilder.addRequestHandlers(
   LaunchRequestHandler,
@@ -28,5 +29,5 @@ const adapter = new ExpressAdapter(skillBuilder.create(), false, false);
 app.post('/', adapter.getRequestHandlers());
 
 app.listen(3000, () => {
-  console.log('Server is running on port 3000');
+  logger.info('Server is running on port 3000');
 });

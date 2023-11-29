@@ -3,11 +3,12 @@ const Alexa = require('ask-sdk');
 const VolumeHandler = require('./VolumeIntent/index');
 const DisplayHandler = require('./DisplayIntent/index');
 const PowerHandler = require('./PowerIntent/index');
+const logger = require('../../logger');
 
 const handlers = {
-  VolumeHandler,
-  DisplayHandler,
-  PowerHandler,
+  VolumeIntent: VolumeHandler,
+  DisplayIntent: DisplayHandler,
+  PowerIntent: PowerHandler,
 };
 
 const IntentHandler = {
@@ -15,7 +16,9 @@ const IntentHandler = {
     return Alexa.getRequestType(handlerInput.requestEnvelope) === 'IntentRequest';
   },
   handle(handlerInput) {
+    logger.info('IntentHandler');
     const intentName = Alexa.getIntentName(handlerInput.requestEnvelope);
+    logger.log('received intent: ', intentName);
     const handlerModule = handlers[intentName];
     return handlerModule.handle(handlerInput);
   },
