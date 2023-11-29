@@ -4,7 +4,7 @@ const logger = require('../logger');
 const BluetoothService = {
   async getBluetoothDevices(callback) {
     try {
-      exec('powershell -NoProfile -ExecutionPolicy Bypass -File ./scripts/listBluetooth.ps1', (error, stdout, stderr) => {
+      exec('powershell -NoProfile -ExecutionPolicy Bypass -File ./src/scripts/listBluetooth.ps1', (error, stdout, stderr) => {
         if (error) {
           logger.error(`Error executing command: ${error.message}`);
           return;
@@ -13,7 +13,7 @@ const BluetoothService = {
           logger.error(`Command stderr: ${stderr}`);
           return;
         }
-        logger.log(`Command stdout: ${stdout}`);
+        logger.info(`Command stdout: ${stdout}`);
         // Parse the stdout to extract device information
         const devices = this.extractMacAddresses(stdout);
         // Invoke the callback with the array of devices

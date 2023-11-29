@@ -14,7 +14,7 @@ const logger = require('../../../logger');
 
 const VolumeHandler = {
   handle(handlerInput) {
-    logger.log('Handling volume intent request');
+    logger.info('Handling volume intent request');
     const command = Alexa.getSlotValue(handlerInput.requestEnvelope, 'volumeCommand');
     const volumeLevel = Alexa.getSlotValue(handlerInput.requestEnvelope, 'amount');
     if (volumeLevel && (volumeLevel > 100 || volumeLevel < 0)) {

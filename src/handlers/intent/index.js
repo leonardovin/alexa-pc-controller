@@ -18,7 +18,7 @@ const IntentHandler = {
   handle(handlerInput) {
     logger.info('IntentHandler');
     const intentName = Alexa.getIntentName(handlerInput.requestEnvelope);
-    logger.log('received intent: ', intentName);
+    logger.info('received intent: ', intentName);
     const handlerModule = handlers[intentName];
     return handlerModule.handle(handlerInput);
   },

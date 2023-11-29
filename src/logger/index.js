@@ -10,7 +10,7 @@ const logger = createLogger({
     timestamp(),
     format.json(),
   ),
-  defaultMeta: { service: 'playbook-email' },
+  defaultMeta: { service: 'alexa-pc-controller' },
 });
 
 // If we're not in production then log to the `console` with the format:

@@ -11,16 +11,16 @@ const LaunchRequestHandler = {
 
     // use the bluetooth service class to list the paired devices
 
-    logger.log('Getting devices');
+    logger.info('Getting devices');
     BluetoothService.getBluetoothDevices((devices) => {
-      logger.log('Devices: ', devices);
+      logger.info('Devices: ', devices);
     });
 
     // Get alexa device mac address
     const deviceId = Alexa.getDeviceId(handlerInput.requestEnvelope);
-
+    console.log('Device ID: ', deviceId);
     if (deviceId) {
-      logger.log('Device ID: ', deviceId);
+      logger.info('Device ID: ', deviceId);
     }
 
     return handlerInput.responseBuilder

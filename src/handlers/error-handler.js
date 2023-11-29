@@ -5,7 +5,7 @@ const ErrorHandler = {
     return true;
   },
   handle(handlerInput, error) {
-    logger.log(`Error handled: ${error.message}`);
+    logger.info(`Error handled: ${error.message}`);
 
     return handlerInput.responseBuilder
       .speak('Sorry, I don\'t understand your command. Please say it again.')
