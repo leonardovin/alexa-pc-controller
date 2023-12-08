@@ -1,5 +1,5 @@
-const { exec } = require('child_process');
-const logger = require('../logger');
+import { exec } from 'child_process';
+import logger from '../logger';
 
 const BluetoothService = {
   async getBluetoothDevices(callback) {
@@ -38,4 +38,4 @@ const BluetoothService = {
   },
 };
 
-module.exports = BluetoothService;
+export default BluetoothService;

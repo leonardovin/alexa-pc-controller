@@ -1,4 +1,4 @@
-const { createLogger, format, transports } = require('winston');
+import  { createLogger, format, transports } from 'winston'
 
 const { combine, timestamp } = format;
 
@@ -23,4 +23,4 @@ if (process.env.NODE_ENV !== 'production') {
   logger.add(new transports.Console());
 }
 
-module.exports = logger;
+export default logger;

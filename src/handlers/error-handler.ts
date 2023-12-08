@@ -1,4 +1,4 @@
-const logger = require('../logger');
+import logger from '../logger';
 
 const ErrorHandler = {
   canHandle() {
@@ -14,4 +14,4 @@ const ErrorHandler = {
   },
 };
 
-module.exports = ErrorHandler;
+export default ErrorHandler;

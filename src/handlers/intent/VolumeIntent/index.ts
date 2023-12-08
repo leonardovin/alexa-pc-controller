@@ -1,22 +1,19 @@
-const childProcess = require('child_process');
-
-const Alexa = require('ask-sdk');
-
-const {
+import {exec} from 'child_process';
+import {getSlotValue} from 'ask-sdk';
+import logger from '../../../logger/index';
+import {
   increaseVolumeCommands,
   decreaseVolumeCommands,
   commandTextMap,
   SYSTEM_VOLUME_MAX,
   DEFAULT_VOLUME,
-} = require('./constants');
-
-const logger = require('../../../logger');
+} from './constants';
 
 const VolumeHandler = {
-  handle(handlerInput) {
+  handle: (handlerInput) => {
     logger.info('Handling volume intent request');
-    const command = Alexa.getSlotValue(handlerInput.requestEnvelope, 'volumeCommand');
-    const volumeLevel = Alexa.getSlotValue(handlerInput.requestEnvelope, 'amount');
+    const command = getSlotValue(handlerInput.requestEnvelope, 'volumeCommand');
+    const volumeLevel = Number(getSlotValue(handlerInput.requestEnvelope, 'amount'));
     if (volumeLevel && (volumeLevel > 100 || volumeLevel < 0)) {
       return handlerInput.responseBuilder
         .speak('O volume deve ser entre 0 e 100')
@@ -40,7 +37,7 @@ const VolumeHandler = {
 
     const speechText = `O volume será ${commandTextMap[sign]} em ${volumeLevel}%`;
 
-    childProcess.exec(`nircmd.exe changesysvolume ${sign + volumeLevelPercentage}`);
+    exec(`nircmd.exe changesysvolume ${sign + volumeLevelPercentage}`);
 
     return handlerInput.responseBuilder
       .speak(speechText)
@@ -49,4 +46,4 @@ const VolumeHandler = {
   },
 };
 
-module.exports = VolumeHandler;
+export default VolumeHandler;
